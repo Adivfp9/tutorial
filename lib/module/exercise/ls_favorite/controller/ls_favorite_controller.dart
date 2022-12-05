@@ -23,7 +23,6 @@ class LsFavoriteController extends State<LsFavoriteView>
   List productList = [];
   loadProductList() async {
     productList = mainStorage.get("products");
-    print(productList.toList());
     ready = true;
     setState(() {});
     /*
@@ -42,6 +41,7 @@ class LsFavoriteController extends State<LsFavoriteView>
   }
 
   addToFavorite(Map item) {
+    if (item["favorite"] == null) item["favorite"] = false;
     item["favorite"] = !item["favorite"];
     setState(() {});
     saveToLocalStorage();
