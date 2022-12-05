@@ -1,3 +1,4 @@
+import 'package:example/config.dart';
 import 'package:example/core.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +28,7 @@ class HtLoginController extends State<HtLoginView> implements MvcController {
     ! snippet: dio_post
     Atur request-nya menjadi seperti ini:
     
+    
     @POST
     @URL
     "${AppConfig.baseUrl}/auth/action/login"
@@ -47,5 +49,24 @@ class HtLoginController extends State<HtLoginView> implements MvcController {
     Jika alert Login Gagal muncul, kamu sudah berhasil
     Menyelesaikan tasks ini
     */
+
+    var response = await Dio().post(
+      "${AppConfig.baseUrl}/auth/action/login",
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ),
+      data: {
+        "email": email,
+        "password": password,
+      },
+    );
+    Map obj = response.data;
+    if (obj["success"] == true) {
+      showInfoDialog("Login success!");
+    } else {
+      showInfoDialog("Login gagal!");
+    }
   }
 }

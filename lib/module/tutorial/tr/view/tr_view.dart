@@ -45,15 +45,15 @@ class TrView extends StatefulWidget {
                   color: Colors.blue,
                 ),
               ),
-              const Text(
-                "String yourName = \"Nama Lengkap Kamu\";",
-                style: TextStyle(
+              Text(
+                "String yourName = ${AppConfig.yourName}",
+                style: const TextStyle(
                   color: Colors.green,
                 ),
               ),
-              const Text(
-                "String phoneNumber = \"Nomor Handphone Kamu\";",
-                style: TextStyle(
+              Text(
+                "String phoneNumber = ${AppConfig.phoneNumber}",
+                style: const TextStyle(
                   color: Colors.green,
                 ),
               ),

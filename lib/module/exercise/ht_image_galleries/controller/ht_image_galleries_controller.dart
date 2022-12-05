@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:example/config.dart';
 import 'package:example/core.dart';
 import 'package:flutter/material.dart';
@@ -110,6 +112,34 @@ class HtImageGalleriesController extends State<HtImageGalleriesView>
 
   doUploadAllPlatform() async {
     showLoading();
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        "png",
+        "jpg",
+      ],
+      allowMultiple: false,
+    );
+    if (result == null) return;
+    File file = File(result.files.single.path!);
+    String filePath = file.path;
+    final formData = FormData.fromMap({
+      'image': MultipartFile.fromBytes(
+        File(filePath).readAsBytesSync(),
+        filename: "upload.jpg",
+      ),
+    });
+
+    var res = await Dio().post(
+      'https://api.imgbb.com/1/upload?key=b55ef3fd02b80ab180f284e479acd7c4',
+      data: formData,
+    );
+
+    var data = res.data["data"];
+    var url = data["url"];
+    await addImage(url);
+    await loadImageGalleries();
+    hideLoading();
     /*
     7. Gunakan file picker yang support untuk semua platform
     !snippet: get_image_with_file_picker
@@ -140,6 +170,29 @@ class HtImageGalleriesController extends State<HtImageGalleriesView>
 
   doUploadAndroidIosAndWeb() async {
     showLoading();
+    XFile? image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 40,
+    );
+    String? filePath = image?.path;
+
+    final formData = FormData.fromMap({
+      'image': MultipartFile.fromBytes(
+        File(filePath!).readAsBytesSync(),
+        filename: "upload.jpg",
+      ),
+    });
+
+    var res = await Dio().post(
+      'https://api.imgbb.com/1/upload?key=b55ef3fd02b80ab180f284e479acd7c4',
+      data: formData,
+    );
+
+    var data = res.data["data"];
+    var url = data["url"];
+    await addImage(url);
+    await loadImageGalleries();
+    hideLoading();
     /*
     13. Ambil gambar dari gallery, gunakan snippet
     ! snippet: get_image_gallery 
