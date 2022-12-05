@@ -22,24 +22,29 @@ class LsFavoriteController extends State<LsFavoriteView>
   bool ready = false;
   List productList = [];
   loadProductList() async {
+    productList = mainStorage.get("products");
+    print(productList.toList());
+    ready = true;
+    setState(() {});
     /*
     TODO: --
     1. Ambil data product dari local storage, gunakan kode ini:
     ###
     productList = mainStorage.get("products");
     ###
-
     2. Setelah itu, panggil kode ini:
     ###
     ready = true;
     setState(() {});
     ###
-
     3. Lanjut ke point 4
     */
   }
 
   addToFavorite(Map item) {
+    item["favorite"] = !item["favorite"];
+    setState(() {});
+    saveToLocalStorage();
     /*
     TODO: --
     4. Gunakan kode ini, untuk mengubah status product
@@ -47,7 +52,6 @@ class LsFavoriteController extends State<LsFavoriteView>
     ###
     item["favorite"] = !item["favorite"];
     ###
-
     5. Panggil setState setelah-nya
     6. Panggil saveLocalStorage setelah setState
     7. Coba klik icon favorite di list bagian bawah,

@@ -32,6 +32,46 @@ class LsUserSettingView extends StatefulWidget {
                   controller.setState(() {});
                 },
               ),
+              SwitchListTile(
+                  value: mainStorage.get("dark_mode") ?? true,
+                  title: const Text("Dark mode"),
+                  onChanged: (value) {
+                    var current = mainStorage.get("dark_mode") ?? true;
+                    mainStorage.put("dark_mode", !current);
+                    controller.setState(() {});
+                  }),
+              SwitchListTile(
+                  value: mainStorage.get("login_as_admin") ?? false,
+                  title: const Text("Login As Admin"),
+                  onChanged: (value) {
+                    var current = mainStorage.get("login_as_admin") ?? false;
+                    mainStorage.put("login_as_admin", !current);
+                    controller.setState(() {});
+                  }),
+              SwitchListTile(
+                  value: mainStorage.get("experimental_mode") ?? true,
+                  title: const Text("Experimental mode"),
+                  onChanged: (value) {
+                    var current = mainStorage.get("experimental_mode") ?? false;
+                    mainStorage.put("experimental_mode", !current);
+                    controller.setState(() {});
+                  }),
+              SwitchListTile(
+                  value: mainStorage.get("offline_mode") ?? true,
+                  title: const Text("Offline mode"),
+                  onChanged: (value) {
+                    var current = mainStorage.get("offline_mode") ?? false;
+                    mainStorage.put("offline_mode", !current);
+                    controller.setState(() {});
+                  }),
+              SwitchListTile(
+                  value: mainStorage.get("cache_mode") ?? true,
+                  title: const Text("Cache mode"),
+                  onChanged: (value) {
+                    var current = mainStorage.get("cache_mode") ?? false;
+                    mainStorage.put("cache_mode", !current);
+                    controller.setState(() {});
+                  }),
               /*
               1. Ok, dengan contoh di atas, buatlah beberapa pengaturan
               dengan SwitchListTile!
