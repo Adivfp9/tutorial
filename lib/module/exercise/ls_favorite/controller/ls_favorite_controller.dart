@@ -41,8 +41,7 @@ class LsFavoriteController extends State<LsFavoriteView>
   }
 
   addToFavorite(Map item) {
-    if (item["favorite"] == null) item["favorite"] = false;
-    item["favorite"] = !item["favorite"];
+    item["favorite"] = !(item["favorite"] ?? false);
     setState(() {});
     saveToLocalStorage();
     /*

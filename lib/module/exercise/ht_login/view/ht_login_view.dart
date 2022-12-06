@@ -8,6 +8,7 @@ class HtLoginView extends StatefulWidget {
     controller.view = this;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text("HtLogin"),
         actions: const [],

@@ -176,6 +176,7 @@ class HtProductCrudFormController extends State<HtProductCrudFormView>
             "description": description,
           });
       Map obj = response.data;
+      print(obj);
     }
     //! ##########################
     //! Jangan edit kode dibawah
